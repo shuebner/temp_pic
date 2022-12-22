@@ -1,0 +1,56 @@
+hope -> insight -> confidence
+
+Team:
+forming -> storming -> norming -> performing -> adjourning, goto storming
+adjourning will cut through the norms and enable higher performance level in the future
+spark inspiration for new ideas
+
+to move through the phases, create a sense of urgency
+	- e. g. bring in an outsider; have crisis; culture of change; address the nay-sayers (those without a sense of urgency)
+	
+create DiagnosticSuppressors for annoying warnings
+why act today?
+	- useful for a lot of people
+	- noone else has done it before
+	- can have IDE0058 suggestions as warnings again
+	
+1. urgency: why act now
+2. team: build guiding coalition (who is on our team, who is going to champion our success?)
+	- Andrii
+	- Jeremy
+	- Arno
+	- David
+	- Alex Probst
+	
+	- Katharina (emotional support)
+	
+	- Sandrine / other recruiters 
+	- mcyntire123
+
+3. expectation: What are our team expectations going to be (can be done before, in the middle and in the retro (or all))
+	8 box challenge
+	- create the actual product of course
+	- makes common expectations clear
+	- make different expectations of others visible
+	- compare my own expectations (that maybe I think others have of me) to the actual expecations of others
+	also: how can we parlay succes in one project to the next project?
+
+4. plan: What is success going to look like? What needs to be accomplished to reach that goal?
+	- what can lead to success? prioritize and place weight
+	
+	- have it work with stringbuilder
+	- have it work with custom-defined methods (on .editorconfig)
+	- unit-test it
+	- create a template for unit-testing a DiagnosticSuppressor
+	- write blog entries about it
+	- auto-recognize fluent APIs
+	
+5. communicate:
+right message in the right way at the right time to the right audience
+understand complexity and emotion
+communicating complex idea by email for the first time may be sabotaging it
+if idea requires discussion or stirs emotions, then create more personal communication with short feedback loop (e. g. chat, video conference)
+
+6. empower: empower action
+if you can implement your ideas all on your own, then your ideas are too small ;-)
+empower others to help implement your ideas

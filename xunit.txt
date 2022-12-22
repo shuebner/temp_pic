@@ -1,0 +1,45 @@
+how to provide default serialization in xunit v2:
+
+TheoryDiscoverer.CreateTestCasesForDataRow
+
+TheoryDiscoverer.Discover will iterate through the data and use SerializationHelper.IsSerializable to determine whether to generate multiple test cases
+data comes from an IDataDiscoverer
+
+DataDiscoverer.GetData:
+- gets the data from the abstract DataAttribute
+
+MemberDataAttribute : MemberDataAttributeBase
+- GetData could wrap the actual data in something implementing IXunitSerializable
+
+
+The method signature of the test method would then have to include the wrapper type
+unless we also can get the test runner to unwrap that data before passing it to the test method.
+
+
+XunitTestRunner.InvokeTestMethodAsync -> XunitTestInvoker.RunAsync -> InvokeTestMethodAsync -> CallTestMethod
+
+we need to override TestInvoker.CallTestMethod
+-> we need to provide a custom TestInvoker inheriting from XunitTestInvoker (to not lose any functionality xUnit provides
+	-> subclass XunitTestInvoker and manipulate the constructor arguments "testMethodArguments"
+	
+to use the CustomXunitTestInvoker we need a custom XunitTestRunner and override InvokeTestMethodAsync
+
+to use CustomXunitTestRunner we need CustomTheoryXunitTestCaseRunner overriding CreateTestRunner to return a CustomXunitTestRunner
+to use a CustomXunitTestRunner we need a CustomXunitTheoryTestCase and override RunAsync
+to use a CustomXunitTheoryTestCase, we need a custom TheoryDiscoverer and override CreateTestCasesForDataRow (and obsolete CreateTestCaseForDataRow) to return a CustomXunitTestCase instead
+
+to use our custom TheoryDiscoverer, we need a custom FactAttribute (in this case a custom TheoryAttribute) that returns a XunitTestCaseDiscovererAttribute giving the FrameworkDiscoverer the CustomTheoryDiscoverer type
+
+
+
+
+serialize key only:
+if the member does not return a list of keys directly, the theorydiscoverer could get them and give them to the test case.
+
+the testcase then needs to create a TestCaseRunner that then creates an XunitTestCaseRunner that gets the full data
+- it could get the data from the MemberDataAttribute itself if it gave the full data to the theory that then only selected the keys
+- it could get the data from the Member specified in the MemberAttribute if the MemberDataAttribute only returned the keys
+- it could get the data from a CustomMemberDataAttribute that has an extra method returning all the data
+
+how can the testcase efficiently get the actual test data?
+MemberDataAttributeBase already returns enumerated stuff, so the derived attributes cannot use features of the test sample collection itself, but only of the items
